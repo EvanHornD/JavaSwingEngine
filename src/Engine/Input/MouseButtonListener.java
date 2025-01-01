@@ -5,6 +5,9 @@ import java.awt.event.MouseListener;
 
 public class MouseButtonListener implements MouseListener {
 
+    public MouseButtonListener() {
+    }
+
     @Override
     public void mousePressed(MouseEvent e) {
         int key = e.getButton();
@@ -23,17 +26,14 @@ public class MouseButtonListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }
