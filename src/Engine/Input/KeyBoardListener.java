@@ -11,16 +11,16 @@ public class KeyBoardListener implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
-        if(KeyBinds.keyBoardBindings.containsKey(key)){
-            KeyBinds.updateKeyBoardAction(key, true);
+        if(Input.keyBoardBindings.containsKey(key)){
+            Input.updateKeyBoardAction(key, true);
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
-        if(KeyBinds.keyBoardBindings.containsKey(key)){
-            KeyBinds.updateKeyBoardAction(key, false);
+        if(Input.keyBoardBindings.containsKey(key)){
+            Input.updateKeyBoardAction(key, false);
         }
     }
 

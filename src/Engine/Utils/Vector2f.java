@@ -1,13 +1,10 @@
 package Engine.Utils;
 
 public class Vector2f {
-    public float x;
-    public float y;
+    public float x=0;
+    public float y=0;
 
-    public Vector2f(){
-        this.x=0;
-        this.y=0;
-    }
+    public Vector2f(){}
 
     public Vector2f(float x, float y){
         this.x = x;
@@ -36,7 +33,6 @@ public class Vector2f {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         return "["+x+","+y+"]";
     }
 }

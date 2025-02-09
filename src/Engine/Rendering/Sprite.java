@@ -8,21 +8,22 @@ import javax.imageio.ImageIO;
 import Engine.Utils.Vector2f;
 
 public class Sprite {
-    private String filePath;
-    private BufferedImage image;
-    private Vector2f dimensions;
-    
-    public Sprite(String filePath){
-        this.filePath = filePath;
+    private String filePath = "";
 
+    private transient BufferedImage image = null;
+    private transient Vector2f dimensions = new Vector2f(1,1);
+
+    public Sprite setSprite(String filePath){
+        if(filePath.equals("")) return this;
+
+        this.filePath = filePath;
         try {
             this.image = ImageIO.read(new File(filePath));
             this.dimensions = new Vector2f(image.getWidth(), image.getHeight());
         } catch (Exception e) {
-            this.image = new BufferedImage(0, 0, BufferedImage.TYPE_4BYTE_ABGR);
-            this.dimensions = new Vector2f();
             System.out.println("There was an error loading file:'"+filePath+"'.");
         }
+        return this;
     }
 
     public BufferedImage getImage() {

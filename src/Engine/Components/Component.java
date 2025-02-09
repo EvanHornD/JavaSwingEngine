@@ -3,11 +3,11 @@ package Engine.Components;
 import Engine.Entity;
 
 public abstract class Component {
-    public Entity entity;
+    public transient Entity entity;
 
-    Component(){
-        
-    }
+    Component(){}
+
     public void init(){}
-    public void run(){};
+    public void run(){} 
+    public abstract Component clone();
 }

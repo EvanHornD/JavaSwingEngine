@@ -4,10 +4,12 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import Engine.Entity;
 import Engine.Rendering.Sprite;
 
 public class AssetPool {
     private static Map<String, Sprite> sprites = new HashMap<>();
+    private static Map<String, Entity> preFabs = new HashMap<>();
 
     public static Sprite getSprite(String filePath){
         File file = new File(filePath);
@@ -28,4 +30,23 @@ public class AssetPool {
 
         AssetPool.sprites.put(file.getAbsolutePath(), sprite);
     }
+
+    public static Entity getPreFab(String name){
+        if(!AssetPool.preFabs.containsKey(name)){
+            System.out.println("Tried to get PreFab'"+name+"' which hasn't been added to the asset pool");
+            return null;
+        }
+        return AssetPool.preFabs.get(name);
+    }
+
+    public static void addPreFab(Entity entity){
+        String name = entity.name;
+        if(AssetPool.preFabs.containsKey(name)){
+            System.out.println("PreFab '"+name+"' already exists in the assetpool");
+            return;
+        }
+
+        AssetPool.preFabs.put(name, entity);
+    }
+
 }

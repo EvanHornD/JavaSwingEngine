@@ -51,6 +51,10 @@ public class Entity {
         }
     }
 
+    public List<Component> getComponents(){
+        return this.components;
+    }
+
     public int zIndex(){
         return this.zIndex;
     }
@@ -65,5 +69,15 @@ public class Entity {
         for (int i = 0; i < components.size(); i++) {
             components.get(i).run();
         }
+    }
+
+    public static Entity instantiate(Entity entity, Transform transform){
+        String name = entity.name;
+        List<Component> components = entity.getComponents();
+        Entity newEntity = new Entity(name, transform, entity.zIndex);
+        for (int i = 0; i < components.size(); i++) {
+            // add the component cloning here
+        }
+        return newEntity;
     }
 }

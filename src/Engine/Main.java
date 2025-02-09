@@ -1,6 +1,6 @@
 package Engine;
 
-import Engine.Input.KeyBinds;
+import Engine.Input.Input;
 import Engine.Scenes.LevelEditorSceneInitializer;
 import Engine.Scenes.Scene;
 import Engine.Utils.Time;
@@ -21,6 +21,13 @@ public class Main {
         currentScene.init();
     }
 
+    public Scene getScene(){
+        if(currentScene == null){
+            currentScene = new Scene(new LevelEditorSceneInitializer(window));
+        } 
+        return currentScene;
+    }
+
     public void run(){
 
         float beginTime = Time.getTime();
@@ -33,7 +40,7 @@ public class Main {
                 currentScene.update(dt);
             }
 
-            KeyBinds.updateKeyActions();
+            Input.updateKeyActions();
             window.render();
             
             endTime = Time.getTime();

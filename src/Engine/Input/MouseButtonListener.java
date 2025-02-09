@@ -11,16 +11,16 @@ public class MouseButtonListener implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         int key = e.getButton();
-        if(KeyBinds.mouseBindings.containsKey(key)){
-            KeyBinds.updateMouseAction(key, true);
+        if(Input.mouseBindings.containsKey(key)){
+            Input.updateMouseAction(key, true);
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         int key = e.getButton();
-        if(KeyBinds.mouseBindings.containsKey(key)){
-            KeyBinds.updateMouseAction(key, false);
+        if(Input.mouseBindings.containsKey(key)){
+            Input.updateMouseAction(key, false);
         }
     }
 

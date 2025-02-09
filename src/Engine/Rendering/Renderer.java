@@ -6,7 +6,7 @@ import java.util.List;
 
 import Engine.Entity;
 import Engine.Window;
-import Engine.Components.SpriteRenderer;
+import Engine.Components.ComponentRenderer;
 import Engine.Utils.Vector2f;
 
 public class Renderer {
@@ -46,9 +46,9 @@ public class Renderer {
         clipCameraToWindow(graphics);
         List<EntityLayer> layers = layerMap.getLayers();
         for (EntityLayer layer : layers) {
-            SpriteRenderer[] sprites = layer.getSprites().toArray(new SpriteRenderer[0]);
-            for (SpriteRenderer spriteRenderer : sprites) {
-                drawSprite(spriteRenderer, graphics);
+            ComponentRenderer[] sprites = layer.getSprites().toArray(new ComponentRenderer[0]);
+            for (ComponentRenderer componentRenderer : sprites) {
+                drawSprite(componentRenderer, graphics);
             }
         }
         graphics.setClip(null);
@@ -69,10 +69,9 @@ public class Renderer {
                           (int)cameraScreenDimensions.y);
     }
 
-    private void drawSprite(SpriteRenderer spriteRenderer, Graphics2D graphics){
-        Sprite sprite = spriteRenderer.sprite();
-        Vector2f spritePos = spriteRenderer.entity.transform.getPosition();
-        Vector2f spriteDimensions = sprite.dimensions();
+    private void drawSprite(ComponentRenderer componentRenderer, Graphics2D graphics){
+        Vector2f spritePos = componentRenderer.entity.transform.getPosition();
+        Vector2f spriteDimensions = componentRenderer.dimensions();
 
         Vector2f posInCamera = camera.applyCameraZoom(camera.toCameraCoords(spritePos));
         Vector2f dimensionsInCamera = camera.applyCameraZoom(spriteDimensions);
@@ -91,7 +90,8 @@ public class Renderer {
             dimensionsInScreen = window.toScreenCoords(dimensionsInCamera);
         }
 
-        graphics.drawImage(sprite.getImage(),(int)posInScreen.x,(int)posInScreen.y,(int)dimensionsInScreen.x,(int)dimensionsInScreen.y,null);
+        graphics.drawImage(componentRenderer.getImage(),(int)posInScreen.x,(int)posInScreen.y,(int)dimensionsInScreen.x,(int)dimensionsInScreen.y,null);
+        
     }
 
 }

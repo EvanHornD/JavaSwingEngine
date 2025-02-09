@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Engine.Entity;
-import Engine.Components.SpriteRenderer;
+import Engine.Components.ComponentRenderer;
 
 public class EntityLayer implements Comparable<EntityLayer> {
     private int zIndex;
-    private List<SpriteRenderer> sprites;
+    private List<ComponentRenderer> sprites;
 
     public EntityLayer(int zIndex){
         this.zIndex = zIndex;
@@ -16,14 +16,14 @@ public class EntityLayer implements Comparable<EntityLayer> {
     }
 
     public void addEntity(Entity entity){
-        if(entity.getComponent(SpriteRenderer.class)!=null){
-            sprites.add(entity.getComponent(SpriteRenderer.class));
+        if(entity.getComponent(ComponentRenderer.class)!=null){
+            sprites.add(entity.getComponent(ComponentRenderer.class));
         }
     }
 
     public void removeEntity(Entity entity){
-        if(entity.getComponent(SpriteRenderer.class)!=null){
-            sprites.remove(entity.getComponent(SpriteRenderer.class));
+        if(entity.getComponent(ComponentRenderer.class)!=null){
+            sprites.remove(entity.getComponent(ComponentRenderer.class));
         }
     }
 
@@ -31,7 +31,7 @@ public class EntityLayer implements Comparable<EntityLayer> {
         return zIndex;
     }
 
-    public List<SpriteRenderer> getSprites() {
+    public List<ComponentRenderer> getSprites() {
         return this.sprites;
     }
 

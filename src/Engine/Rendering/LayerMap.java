@@ -20,7 +20,7 @@ public class LayerMap {
             added = addToLayer(layer, entity);
             if(added){
                 break;
-            }
+            }  
         }
         if(!added){
             EntityLayer newLayer = new EntityLayer(entity.zIndex());
