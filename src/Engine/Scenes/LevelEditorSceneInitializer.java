@@ -28,27 +28,28 @@ public class LevelEditorSceneInitializer extends SceneInitializer {
         Renderer game = new Renderer("Game",this.window,true);
 
         Entity entity = new Entity("test", new Transform(new Vector2f(100, 100)), 0);
-
         Sprite sprite = AssetPool.getSprite("src\\assets\\images\\tetrisBlockBlue.png");
         Text text = new Text()
                        .setText("Thank You!!")
                        .setFontSize(12)
                        .setFontName("Arial");
- 
         ComponentRenderer spriteRenderer = new ComponentRenderer()
                                                .setSprite(sprite)
                                                .setText(text)
                                                .createImage();
         entity.addComponent(spriteRenderer);
+        AssetPool.addPreFab(entity);
 
+
+        Entity spawnerEntity = new Entity("spawner", new Transform(new Vector2f(100, 100)), 0);
+        ComponentRenderer emptyRenderer = new ComponentRenderer();
         testScript script = new testScript();
-        entity.addComponent(script);
-
-        game.add(entity);
-        scene.addEntity(entity);
+        spawnerEntity.addComponent(script);
+        spawnerEntity.addComponent(emptyRenderer);
 
         scene.renderers.add(game);
         scene.renderers.add(new Renderer("EditorGUI",this.window,false));
+        scene.addEntity(spawnerEntity);
 
         Gson gson = new GsonBuilder()
                     .setPrettyPrinting()

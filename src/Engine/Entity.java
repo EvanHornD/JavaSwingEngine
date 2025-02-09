@@ -75,9 +75,11 @@ public class Entity {
         String name = entity.name;
         List<Component> components = entity.getComponents();
         Entity newEntity = new Entity(name, transform, entity.zIndex);
-        for (int i = 0; i < components.size(); i++) {
-            // add the component cloning here
+        for (Component component : components) {
+            Component newComponent = component.clone();
+            newEntity.addComponent(newComponent);
         }
+        Main.currentScene.addEntity(newEntity);
         return newEntity;
     }
 }

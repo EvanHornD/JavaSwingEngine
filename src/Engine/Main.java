@@ -10,7 +10,7 @@ public class Main {
     private Window window;
     public boolean isRunning = true;
 
-    private static Scene currentScene;
+    public static Scene currentScene;
 
     public Main(Window window) {
         this.window = window;

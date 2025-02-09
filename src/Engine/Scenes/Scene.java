@@ -17,21 +17,23 @@ import Engine.Rendering.Renderer;
 
 public class Scene {
 
-    ArrayList<Renderer> renderers;
-    ArrayList<Entity> entities;
-    boolean isRunning = false; 
+    public ArrayList<Renderer> renderers;
+    public ArrayList<Entity> entities;
+    public boolean isRunning = false; 
+    private ArrayList<Entity> queuedEntities;
 
     SceneInitializer sceneInitializer;
 
     public Scene(SceneInitializer sceneInitializer) {
         this.renderers = new ArrayList<>();
         this.entities = new ArrayList<>();
+        this.queuedEntities = new ArrayList<>();
         this.sceneInitializer = sceneInitializer;
     }
 
     public void addEntity(Entity entity){
-        entity.init();
-        entities.add(entity);
+        renderers.get(0).add(entity);
+        queuedEntities.add(entity);
     }
 
     public void init(){
@@ -48,6 +50,13 @@ public class Scene {
         }
         for (Entity entity : entities) {
             entity.run();
+        }
+        for (Entity entity : queuedEntities) {
+            entity.init();
+            entities.add(entity);
+        }
+        for (int i = 0; i < queuedEntities.size(); i++) {
+            queuedEntities.remove(0);
         }
     }
 
