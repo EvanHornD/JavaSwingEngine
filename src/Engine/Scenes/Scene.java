@@ -29,14 +29,25 @@ public class Scene {
         this.sceneInitializer = sceneInitializer;
     }
 
+    public void addEntity(Entity entity){
+        entity.init();
+        entities.add(entity);
+    }
+
     public void init(){
         sceneInitializer.loadResources(this);
         sceneInitializer.init(this);
+        for (Entity entity : entities) {
+            entity.init();
+        }
     }
 
     public void update(float dt){
         for (Renderer renderer: renderers) {
             renderer.draw();
+        }
+        for (Entity entity : entities) {
+            entity.run();
         }
     }
 
@@ -77,5 +88,5 @@ public class Scene {
         }
     }
 
-    
+
 }
