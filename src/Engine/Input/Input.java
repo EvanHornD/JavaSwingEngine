@@ -39,8 +39,6 @@ public final class Input {
     public Input() {
     }
 
-
-
     public static boolean containsKeyBind(int key){
         return Input.keyBoardBindings.containsKey(key);
     }
@@ -79,6 +77,11 @@ public final class Input {
             return;
         }
         Input.Actions.replace(mouseBindings.get(Key), -1);
+    }
+
+    public static void updateMousePosition(int x, int y){
+        mousePosition.x = x;
+        mousePosition.y = y;
     }
 
     public static void updateKeyActions(){

@@ -35,5 +35,4 @@ public class MouseButtonListener implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
     }
-
 }

@@ -2,6 +2,7 @@ package Engine;
 
 import Engine.Input.KeyBoardListener;
 import Engine.Input.MouseButtonListener;
+import Engine.Input.MouseMovementListener;
 import Engine.Utils.Vector2f;
 
 import java.awt.Graphics;
@@ -66,9 +67,11 @@ public class Window {
         // add the mouse and keyboard listeners
         KeyBoardListener keyListener = new KeyBoardListener();
         MouseButtonListener mouseListener = new MouseButtonListener();
+        MouseMovementListener mouseMovementListener = new MouseMovementListener();
 
         this.panel.addKeyListener(keyListener);
         this.panel.addMouseListener(mouseListener);
+        this.panel.addMouseMotionListener(mouseMovementListener);
 
         frame.add(panel);
 
