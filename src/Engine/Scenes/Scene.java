@@ -32,7 +32,6 @@ public class Scene {
     }
 
     public void addEntity(Entity entity){
-        renderers.get(0).add(entity);
         queuedEntities.add(entity);
     }
 
@@ -42,21 +41,23 @@ public class Scene {
         for (Entity entity : entities) {
             entity.init();
         }
+        for (Entity entity : entities) {
+            System.out.println(entity.name);
+        }
     }
 
     public void update(float dt){
+        for (Entity entity : queuedEntities) {
+            renderers.get(0).add(entity);
+            entities.add(entity);
+            entity.init();
+        }
+        queuedEntities.clear();
         for (Renderer renderer: renderers) {
             renderer.draw();
         }
         for (Entity entity : entities) {
             entity.run();
-        }
-        for (Entity entity : queuedEntities) {
-            entity.init();
-            entities.add(entity);
-        }
-        for (int i = 0; i < queuedEntities.size(); i++) {
-            queuedEntities.remove(0);
         }
     }
 

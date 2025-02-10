@@ -16,13 +16,19 @@ public class Renderer {
     String name;
     LayerMap layerMap;
     BufferedImage buffer;
+    Graphics2D graphics;
     boolean isScreenScalable;
 
     public Renderer(String name, Window window, boolean isScreenScalable){
         this.camera = new Camera();
         this.name = name;
         this.window = window;
-        this.buffer = window.buffer;
+
+        int width = window.buffer.getWidth();
+        int height = window.buffer.getHeight();
+        this.buffer = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
+
+        this.graphics = buffer.createGraphics();
         this.layerMap = new LayerMap();
         this.isScreenScalable = isScreenScalable;
     }
@@ -41,8 +47,6 @@ public class Renderer {
     }
 
     public void draw(){
-        this.buffer = window.buffer;
-        Graphics2D graphics = buffer.createGraphics();
         clipCameraToWindow(graphics);
         List<EntityLayer> layers = layerMap.getLayers();
         for (EntityLayer layer : layers) {
@@ -52,6 +56,7 @@ public class Renderer {
             }
         }
         graphics.setClip(null);
+        window.render(buffer);
     }
 
     private void clipCameraToWindow(Graphics2D graphics){
@@ -93,5 +98,4 @@ public class Renderer {
         graphics.drawImage(componentRenderer.getImage(),(int)posInScreen.x,(int)posInScreen.y,(int)dimensionsInScreen.x,(int)dimensionsInScreen.y,null);
         
     }
-
 }

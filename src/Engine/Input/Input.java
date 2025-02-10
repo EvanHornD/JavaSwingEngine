@@ -5,6 +5,8 @@ import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+import Engine.Utils.Vector2f;
+
 public final class Input { 
 
     static Map<Integer, String> keyBoardBindings = new HashMap<>(Map.of(
@@ -31,6 +33,8 @@ public final class Input {
         "Input", 0,
         "test",0
     ));
+
+    public static Vector2f mousePosition = new Vector2f(0, 0);
 
     public Input() {
     }

@@ -4,6 +4,7 @@ public class Colors {
 
 
     public static final int WHITE = 0xffffffff;
+    public static final int GREY = 0xffbfbfbf;
     public static final int BLACK = 0xff000000;
 
     public int alpha = 0;

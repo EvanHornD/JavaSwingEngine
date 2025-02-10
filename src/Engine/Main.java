@@ -41,7 +41,6 @@ public class Main {
             }
 
             Input.updateKeyActions();
-            window.render();
             
             endTime = Time.getTime();
             dt = endTime-beginTime;

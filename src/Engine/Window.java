@@ -5,6 +5,7 @@ import Engine.Input.MouseButtonListener;
 import Engine.Utils.Vector2f;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -19,6 +20,7 @@ public class Window {
     private Rectangle bounds;
     private Vector2f windowSizeRatio;
     public BufferedImage buffer;
+    public Graphics2D graphics;
 
     public Window(){
     }
@@ -43,6 +45,7 @@ public class Window {
                 windowSizeRatio = new Vector2f(frame.getWidth()/1920f, frame.getHeight()/1080f);
                 System.out.println(frame.getHeight());
                 buffer = new BufferedImage(bounds.width, bounds.height, BufferedImage.TYPE_4BYTE_ABGR);
+                graphics = buffer.createGraphics();
             }
         });
 
@@ -50,13 +53,12 @@ public class Window {
         this.panel = new JPanel(){
             @Override
             protected void paintComponent(Graphics g){
-                super.paintComponent(g);
                 if (buffer!=null) {
                     g.drawImage(buffer, 0, 0, null);
                 }
             }
         };
-
+        this.panel.setIgnoreRepaint(true);
         this.panel.setBounds(bounds);
         this.panel.setFocusable(true);
         this.panel.requestFocus();
@@ -72,6 +74,7 @@ public class Window {
 
         // create buffer image
         buffer = new BufferedImage(bounds.width, bounds.height, BufferedImage.TYPE_4BYTE_ABGR);
+        graphics = buffer.createGraphics();
 
         Main main = new Main(this);
         main.init();
@@ -82,7 +85,8 @@ public class Window {
         return Vector2f.multiply(vector2f, windowSizeRatio);
     }
 
-    public void render(){
+    public void render(BufferedImage image){
+        graphics.drawImage(image,0,0,null);
         this.panel.repaint();
         //this.buffer = new BufferedImage(bounds.width, bounds.height, BufferedImage.TYPE_4BYTE_ABGR);
     }

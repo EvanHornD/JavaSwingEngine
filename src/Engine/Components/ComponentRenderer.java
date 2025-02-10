@@ -3,6 +3,7 @@ package Engine.Components;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import Engine.Rendering.Shape2D;
 import Engine.Rendering.Sprite;
 import Engine.Rendering.Text;
 import Engine.Utils.Vector2f;
@@ -10,6 +11,7 @@ import Engine.Utils.Vector2f;
 public class ComponentRenderer extends Component {
     private Sprite sprite = null;
     private Text text = null;
+    private Shape2D shape = null;
 
     private transient BufferedImage image = null;
     private transient Vector2f dimensions = new Vector2f(1, 1);
@@ -36,6 +38,12 @@ public class ComponentRenderer extends Component {
             Vector2f textDimensions = text.dimensions();
             graphics.drawImage(textImage, (int)((dimensions.x/2)-(textDimensions.x/2)), (int)((dimensions.y/2)-(textDimensions.y/2)), null);
         }
+
+        if(shape!=null){
+            BufferedImage shapeImage = shape.getImage();
+            Vector2f shapeDimensions = shape.dimensions();
+            graphics.drawImage(shapeImage, (int)((dimensions.x/2)-(shapeDimensions.x/2)), (int)((dimensions.y/2)-(shapeDimensions.y/2)), null);
+        }
         return this;
     }
 
@@ -51,6 +59,12 @@ public class ComponentRenderer extends Component {
             Vector2f textDimensions = text.dimensions();
             dimensions.x = Math.max(dimensions.x, textDimensions.x);
             dimensions.y = Math.max(dimensions.y, textDimensions.y);
+        }
+
+        if(shape!=null){
+            Vector2f shapeDimensions = shape.dimensions();
+            dimensions.x = Math.max(dimensions.x, shapeDimensions.x);
+            dimensions.y = Math.max(dimensions.y, shapeDimensions.y);
         }
         this.dimensions = dimensions;
     }
@@ -69,12 +83,21 @@ public class ComponentRenderer extends Component {
         return this;
     }
 
+    public ComponentRenderer setShape(Shape2D shape){
+        this.shape = shape;
+        return this;
+    }
+
     public Sprite getSprite(){
         return this.sprite;
     }
 
     public Text getText(){
         return this.text;
+    }
+
+    public Shape2D getShape2d(){
+        return this.shape;
     }
 
     @Override
